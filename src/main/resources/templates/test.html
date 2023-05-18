@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Статистика использования систем планирования</title>
+  <style>
+    .chart {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 400px;
+      height: 300px;
+      margin-bottom: 50px;
+    }
+
+    .slice, .bar {
+      width: 20%;
+      background-color: #007bff;
+      text-align: center;
+      color: #fff;
+      font-weight: bold;
+      transition: height 0.3s;
+    }
+
+    .slice:hover, .bar:hover {
+      background-color: #0056b3;
+      cursor: pointer;
+    }
+
+    .label {
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+<h1>Статистика использования систем планирования</h1>
+
+<h2>Распределение использования систем планирования по возрастным группам</h2>
+<div class="chart">
+  <div class="slice" id="age-group-1">
+    <span class="label">18-25</span>
+  </div>
+  <div class="slice" id="age-group-2">
+    <span class="label">26-35</span>
+  </div>
+  <div class="slice" id="age-group-3">
+    <span class="label">36-45</span>
+  </div>
+  <div class="slice" id="age-group-4">
+    <span class="label">46-55</span>
+  </div>
+  <div class="slice" id="age-group-5">
+    <span class="label">56+</span>
+  </div>
+</div>
+
+<h2>Частота использования систем планирования</h2>
+<div class="chart">
+  <div class="bar" style="height: 80%;" data-category="daily">
+    <span class="label">Ежедневно</span>
+  </div>
+  <div class="bar" style="height: 60%;" data-category="weekly">
+    <span class="label">Еженедельно</span>
+  </div>
+  <div class="bar" style="height: 40%;" data-category="monthly">
+    <span class="label">Ежемесячно</span>
+  </div>
+  <div class="bar" style="height: 20%;" data-category="rarely">
+    <span class="label">Редко</span>
+  </div>
+</div>
+</body>
+</html>

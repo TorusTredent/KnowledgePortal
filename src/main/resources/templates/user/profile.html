@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+<div th:replace="~{/utils/_header}"></div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>User Profile</h1>
+        <a href="/user/logout" class="btn btn-primary">Logout</a>
+    </div>
+    <hr>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <form th:action="@{/user/profile}" th:method="post" th:object="${profile}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                           th:value="${profile.username}">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" th:value="${profile.email}">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           th:value="${profile.password}">
+                </div>
+                <button type="submit" class="btn btn-primary" id="editButton">Update</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Uploaded Files</h3>
+            <div class="input-group mb-3 col-md-6">
+                <input type="text" class="form-control" placeholder="Search by date or file name" id="searchInput">
+                <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+            </div>
+            <ul class="list-group" id="fileList">
+                <li th:each="record : ${records}" class="file-link">
+                    <a th:href="@{/record/download/{id}(id = ${record.id})}" th:text="${record.name} + ' - ' + ${record.create.getYear()} + '-'
+                    + ${record.getCreate().getDayOfMonth()} + '-' + ${record.getCreate().getDayOfMonth()}"></a>
+                    <span class="badge bg-success" th:text="${record.recordStatus}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript code for handling the edit and search functionality
+    document.getElementById("editButton").addEventListener("click", function () {
+        // Enable editing of fields
+        document.getElementById("username").readOnly = false;
+        document.getElementById("email").readOnly = false;
+        document.getElementById("password").readOnly = false;
+    });
+
+    document.getElementById("searchButton").addEventListener("click", function () {
+        var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+        var listItems = document.getElementById("fileList").getElementsByTagName("li");
+        for (var i = 0; i < listItems.length; i++) {
+            var listItemText = listItems[i].innerText.toLowerCase();
+            if (listItemText.includes(searchTerm)) {
+                listItems[i].style.display = "block"; // Show matching items
+            } else {
+                listItems[i].style.display = "none"; // Hide non-matching items
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+

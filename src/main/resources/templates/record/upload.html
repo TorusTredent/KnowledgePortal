@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка файла</title>
+    <!-- Подключение стилей Bootstrap -->
+</head>
+<body>
+<div th:replace="~{/utils/_header}"></div>
+
+<div class="container">
+    <h1 class="justify-content-center">Загрузка файла</h1>
+    <form action="#" th:action="@{/record/upload}" th:object="${file}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Выберите файл:</label>
+            <input type="file" class="form-control" id="file" name="file">
+        </div>
+        <div class="form-group">
+            <label for="fileName">Имя файла:</label>
+            <input type="text" class="form-control" id="fileName" name="fileName" required >
+        </div>
+        <div class="form-group">
+            <label for="disciplineName">Дисциплина:</label>
+            <select class="form-control" id="disciplineName" name="disciplineName">
+                <option th:each="disciplineName : ${disciplineNames}" th:value="${disciplineName}" th:text="${disciplineName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="recordType">Тип файла:</label>
+            <select class="form-control" id="recordType" name="recordType">
+                <option th:each="recordType : ${recordTypes}" th:value="${recordType}" th:text="${recordType.getRussian()}"></option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary justify-content-centre">Загрузить</button>
+    </form>
+</div>
+</body>
+</html>
